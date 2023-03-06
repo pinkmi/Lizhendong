@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <script src="../static/axios.min.js"></script>
+    <script src="../static/vue.js"></script>
+    <script src="../static/jquery-3.6.0.js"></script>
+    <title>sound</title>
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            background-color: #f0f0f0;
+            background-size: 100% 100%;
+            margin: 0px;
+            padding: 0px;
+            font-family: Times New Roman,楷体;
+            font-size:30px;
+            height: 100%;
+        }
+        .container {
+            margin-top: 1%;
+            margin-left: 7%;
+        }
+        .upload input[type="file"]{
+            font-size: 25px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .upload input[type="submit"]{
+            font-size: 25px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        #sound {
+            width: 100%;
+            height: 100%;
+            border: 1px red;
+        }
+        #img_origin {
+            margin-top: 3%;
+            margin-left: 7%;
+            width: 620px;
+            height: 465px;
+            border: 1px red;
+            position: absolute;
+        }
+        #img_processed {
+            margin-top: 3%;
+            margin-left:52%;
+            width: 620px;
+            height: 465px;
+            border: 1px red;
+            position: absolute;
+        }
+        #btn {
+            margin-top: 3%;
+            margin-left: 7%;
+            width:20%;
+            height: 10%;
+            font-size: 30px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+    </style>  
+</head>
+<body>
+    <div class="container">
+        <div class="upload">
+            <div class="header">
+                <table>
+                    <tr>
+                        <td><span>File upload:</span></td>
+                        <td>
+                            <form action="/upload" method="post" enctype="multipart/form-data" class="upload">
+                                <td style="background-color: #ffffff;border-radius: 10px;"><label for="file_upload">Select file to upload</label></td>
+                                <td><input type="file" name="filename" value="Choose" id="file_upload" style="display: none;"></td>
+                                <td><input type="submit" value="Upload"></td>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>       
+        </div>                   
+    </div>
+    <div id="sound">
+        <div style="margin-top: 2%; margin-left: 7%;">
+            <table>
+                <tr>
+                    <td><span>The  processed audio file is:</span></td>
+                    <td><span id="filename1">{{filename}}</span></td>
+                    
+                </tr>
+                
+            </table>
+        </div>
+        <button id="btn" @click="ajaxx">Display output results</button>
+        <div id="img_origin">
+            <span>Original signal spectrum image</span><br>
+            <img id="origin" style="width: 100%;height: 100%;">
+        </div>
+        <div id="img_processed">
+            <span>Spectrum image after adding noise</span><br>
+            <img id="processed" style="width: 100%;height: 100%;">
+        </div>
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el:"#sound",
+            data:{
+                ip:"http://127.0.0.1:5500/sound/",
+            },
+            methods:{                
+                ajaxx(){
+                    var name = document.getElementById("filename1").innerHTML;
+                    axios.get(this.ip+name).then(
+                        res=>{
+                            this.filename = res.data;
+                            document.getElementById('origin').src="http://localhost:8000/origin.jpg";
+                            document.getElementById('processed').src="http://localhost:8000/processed.jpg";
+                        }
+                    )
+                }
+            }
+        })
+    </script>
+</body>
+</html>

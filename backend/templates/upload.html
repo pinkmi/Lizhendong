@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sound-process</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+        html {
+            height: 100%;
+        }
+        body {
+            font-family: "楷体";
+            height: 100%;
+        }
+        .container {
+            height: 100%;
+            /* background-image: linear-gradient(to right, #fbc2eb, #a6c1ee); */
+        }
+        .upload {
+            background-color: #f0f0f0;
+            width: 758px;
+            height: 488px;
+            border-radius: 15px;
+            padding: 0 50px;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .upload label{
+            font-size: 30px;
+        }
+        .header {
+            font-family: 楷体;
+            font-size: 45px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 200px;
+        }
+        .upload input[type="submit"] {
+            display: inline-block;
+            vertical-align: middle;
+            width: 80px;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+            font-size: 20px;
+            font-family: "楷体";
+            background-color: #f54;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="upload">
+            <div class="header">文件上传</div>
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <input type="file" name="filename">
+                    <input type="submit" value="上传">
+                </form>                     
+            </div>                   
+    </div>
+</body>
+</html>
